@@ -13,11 +13,16 @@
  */
 
 module.exports = function serverError (data, options) {
+  var rollbar = require('rollbar');
+  // Access Token from the Demo App:
+  rollbar.init("fc316ac1f7404dc28af26d5baed1416c");
 
   // Get access to `req`, `res`, & `sails`
   var req = this.req;
   var res = this.res;
   var sails = req._sails;
+
+  rollbar.handleError(data, req);
 
   // Set status code
   res.status(500);
@@ -74,4 +79,3 @@ module.exports = function serverError (data, options) {
   });
 
 };
-
